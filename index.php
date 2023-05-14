@@ -3,7 +3,7 @@
 // Array to store errors
 $errors = array();
 // Error message for empty fields
-$error_message = "Please fill in ";
+$error_message = "Please fill in these fields: ";
 
 function sanitizeInputs($data)
 {
@@ -52,11 +52,10 @@ if (isset($_POST['submit'])) {
             header('location: index.php');
         }
     } else {
-        $last_error = array_pop($errors);
+
         foreach ($errors as $error) {
-            $error_message .= "$error, ";
+            $error_message .= "$error ";
         }
-        $error_message .= "$last_error.";
     }
 }
 
