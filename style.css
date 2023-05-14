@@ -1,3 +1,51 @@
+form {
+    width: 500px;
+    background-color: antiquewhite;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+label, input, textarea {
+    display: block;
+    width: 90%;
+    font-family: inherit;
+    font-size: inherit;
+    padding: 6px;
+}
+
+input[type='submit'] {
+    margin: 1rem 0.5rem;
+    width: 100px;
+    padding: 4px;
+}
+
+.form_group {
+    margin: 0.5rem;
+}
+
 table a {
     padding: 4px;
+}
+
+.book img {
+    width: 300px;
+    height: auto;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: bisque;
+}
+
+table{
+    border-collapse: collapse;
+    margin-bottom: 1em;
+}
+
+table,th,td{
+    border:solid black 1px;
+    padding: 0.5em;
+}
+thead{
+    background-color: bisque;
 }

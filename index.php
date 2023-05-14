@@ -98,22 +98,22 @@ $books = mysqli_query($mysqli, "SELECT id, title, author, genre FROM books");
         <h2>Book recommendations app</h2>
     </header>
     <form action="index.php" method="POST">
-        <p>
+        <div class="form_group">
             <label for="title">Title</label>
             <input type="text" name="title" id="title">
-        </p>
-        <p>
+        </div>
+        <div class="form_group">
             <label for="author">Author</label>
             <input type="text" name="author" id="author">
-        </p>
-        <p>
+        </div>
+        <div class="form_group">
             <label for="genre">Genre</label>
             <input type="text" name="genre" id="genre">
-        </p>
-        <p>
+        </div>
+        <div class="form_group">
             <label for="description">Description</label>
             <textarea name="description" id="description" cols="30" rows="6"></textarea>
-        </p>
+        </div>
         <input type="submit" name="submit" value="Add book">
         <?php if (isset($success_message)) : ?>
             <p class="success-message"><?php echo $success_message ?></p>
