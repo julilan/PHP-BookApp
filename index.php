@@ -77,7 +77,7 @@ if (isset($_GET['del_book'])) {
     }
 }
 
-// Read data from database
+// Get data from database
 $books = mysqli_query($mysqli, "SELECT id, title, author, genre FROM books");
 
 ?>
