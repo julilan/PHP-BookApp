@@ -42,17 +42,21 @@ elseif (isset($_POST['submit'])) {
     $genre = $_POST['genre'];
     if (empty($_POST['description'])) {
         $errors[] = "description";
-        $sql = "SELECT description from books WHERE id = $id";
-        $result = mysqli_query($mysqli, $sql);
+        $sql = "SELECT description FROM books WHERE id = ?";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
         if (!$result) {
             echo "ERROR: Query failed.";
         } else {
-            $row = mysqli_fetch_assoc($result);
+            $row = $result->fetch_assoc();
             $description = htmlspecialchars($row['description'], ENT_QUOTES, 'UTF-8');
         }
     } else {
         $description = sanitizeInputs($_POST['description']);
     }
+
     // These can be left null
     $link = sanitizeInputs($_POST['link']);
     $image = sanitizeInputs($_POST['image']);
