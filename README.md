@@ -19,4 +19,4 @@ Books have view, edit and delete actions. Delete is preceeded by confirmation.
 git clone https://github.com/julilan/PHP-BookApp.git
 ```
  - Import database from bookdb.sql
- - Landing page: http://localhost:8005/PHP-BookApp/index.php
+ - Landing page: http://localhost:8005/PHP-BookApp/index.php (PHP-MAMP)
