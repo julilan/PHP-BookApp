@@ -1,5 +1,10 @@
 <?php include 'db.php';
 
+// Array to store errors
+$errors = array();
+// Error message for empty fields
+$error_message = "These fields cannot be empty: ";
+
 function sanitizeInputs($data)
 {
     $data = trim($data);
@@ -9,29 +14,42 @@ function sanitizeInputs($data)
     return $data;
 }
 
-// Array to store errors
-$errors = array();
-// Error message for empty fields
-$error_message = "These fields cannot be empty: ";
-
-if (isset($_GET['update_book'])) {
-    $id = $_GET['update_book'];
-
-    // Get book data
-    $sql = "SELECT title, author, genre, description, link, image from books WHERE id = ?";
+// Validating the id from GET request
+function checkId($id, $mysqli): bool
+{
+    $sql = "SELECT title from books WHERE id = ?";
     $stmt = $mysqli->prepare($sql);
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
-    $book = $result->fetch_assoc();
+    return $result->num_rows > 0;
+}
 
-    // Populate form fields with book data
-    $title = htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8');
-    $author = htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8');
-    $genre = htmlspecialchars($book['genre'], ENT_QUOTES, 'UTF-8');
-    $description = htmlspecialchars($book['description'], ENT_QUOTES, 'UTF-8');
-    $link = htmlspecialchars($book['link'], ENT_QUOTES, 'UTF-8');
-    $image = htmlspecialchars($book['image'], ENT_QUOTES, 'UTF-8');
+
+if (isset($_GET['update_book'])) {
+    $id = $_GET['update_book'];
+    $idCheck = checkId($id, $mysqli);
+
+    if ($idCheck === false) {
+        // If id is not valid, go back to index.php
+        header('location: index.php');
+    } else {
+        // Get book data
+        $sql = "SELECT title, author, genre, description, link, image from books WHERE id = ?";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $book = $result->fetch_assoc();
+
+        // Populate form fields with book data
+        $title = htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8');
+        $author = htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8');
+        $genre = htmlspecialchars($book['genre'], ENT_QUOTES, 'UTF-8');
+        $description = htmlspecialchars($book['description'], ENT_QUOTES, 'UTF-8');
+        $link = htmlspecialchars($book['link'], ENT_QUOTES, 'UTF-8');
+        $image = htmlspecialchars($book['image'], ENT_QUOTES, 'UTF-8');
+    }
 }
 // Handle form submission
 elseif (isset($_POST['submit'])) {
@@ -40,6 +58,7 @@ elseif (isset($_POST['submit'])) {
     $title = $_POST['title'];
     $author = $_POST['author'];
     $genre = $_POST['genre'];
+    // Check empty and sanitize description field
     if (empty($_POST['description'])) {
         $errors[] = "description";
         $sql = "SELECT description FROM books WHERE id = ?";
@@ -77,9 +96,6 @@ elseif (isset($_POST['submit'])) {
             $error_message .= "$error ";
         }
     }
-} else {
-    echo "ERROR: could not find book with that id";
-    header('location: index.php');
 }
 
 ?>
@@ -125,6 +141,7 @@ elseif (isset($_POST['submit'])) {
         <input type="submit" name="submit" value="Edit book">
         <p><?php if (!empty($errors)) echo $error_message; ?></p>
     </form>
+    <a href="index.php">Back to books</a>
 </body>
 
 </html>

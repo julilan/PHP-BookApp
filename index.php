@@ -5,6 +5,7 @@ $errors = array();
 // Error message for empty fields
 $error_message = "Please fill in these fields: ";
 
+
 function sanitizeInputs($data)
 {
     $data = trim($data);
@@ -47,9 +48,9 @@ if (isset($_POST['submit'])) {
 
         // Attempt insert
         if ($stmt->execute()) {
-            header('location: index.php');
+            $success_message = "Book added successfully!";
         } else {
-            header('location: index.php');
+            $insert_error = "Could not add book: " . $stmt->error;
         }
     } else {
 
@@ -70,7 +71,6 @@ if (isset($_GET['del_book'])) {
     // Attempt delete
     if ($stmt->execute()) {
         header('location: index.php');
-        echo "Record deleted successfully.";
     } else {
         header('location: index.php');
         echo "ERROR: Could not execute $stmt->error";
@@ -115,7 +115,13 @@ $books = mysqli_query($mysqli, "SELECT id, title, author, genre FROM books");
             <textarea name="description" id="description" cols="30" rows="6"></textarea>
         </p>
         <input type="submit" name="submit" value="Add book">
-        <p><?php if (!empty($errors)) echo $error_message; ?></p>
+        <?php if (isset($success_message)) : ?>
+            <p class="success-message"><?php echo $success_message ?></p>
+        <?php endif; ?>
+        <?php if (isset($insert_error)) : ?>
+            <p class="error-message"><?php echo $insert_error ?></p>
+        <?php endif; ?>
+        <p class="error-message"><?php if (!empty($errors)) echo $error_message; ?></p>
     </form>
 
     <table>
@@ -134,7 +140,7 @@ $books = mysqli_query($mysqli, "SELECT id, title, author, genre FROM books");
                     <td><?php echo $row['author']; ?></td>
                     <td><?php echo $row['genre']; ?></td>
                     <td>
-                        <!-- <a href="#">view</a> -->
+                        <a href="view.php?view_book=<?php echo $row['id']; ?>">view</a>
                         <a href="update.php?update_book=<?php echo $row['id']; ?>">edit</a>
                         <a href="index.php?del_book=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this book?')">remove</a>
                     </td>
