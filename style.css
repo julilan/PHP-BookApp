@@ -1,16 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@400;500;600&display=swap');
+
+body {
+    font-family: 'Bitter', serif;
+    background-color: bisque;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+header {
+    text-align: center;
+}
+
+h1 {
+    margin: 1rem;
+}
+
+.content {
+    margin: 0.5rem;
+    padding: 1rem;
+    background-color: antiquewhite;
+    border-radius: 2px;
+}
+
+h2 {
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+#form_heading {
+    margin-left: 0.5rem;
+}
+
 form {
     width: 500px;
-    background-color: antiquewhite;
-    padding: 1rem;
     margin-bottom: 1rem;
 }
 
 label, input, textarea {
     display: block;
-    width: 90%;
+    width: 96%;
     font-family: inherit;
     font-size: inherit;
-    padding: 6px;
+    padding: 0.5rem;
 }
 
 input[type='submit'] {
@@ -25,6 +59,8 @@ input[type='submit'] {
 
 table a {
     padding: 4px;
+    text-decoration: none;
+    color: black;
 }
 
 .book img {
@@ -32,20 +68,15 @@ table a {
     height: auto;
 }
 
-body {
-    font-family: 'Courier New', Courier, monospace;
-    background-color: bisque;
-}
-
 table{
     border-collapse: collapse;
-    margin-bottom: 1em;
+    margin: 1rem 0;
 }
 
-table,th,td{
+table, td{
     border:solid black 1px;
-    padding: 0.5em;
 }
-thead{
-    background-color: bisque;
+
+table, td, th {
+    padding: 0.5rem;
 }
