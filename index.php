@@ -147,13 +147,13 @@ $books = mysqli_query($mysqli, "SELECT id, title, author, genre FROM books");
                             <td><?php echo $row['author']; ?></td>
                             <td><?php echo $row['genre']; ?></td>
                             <td>
-                                <a href="view.php?view_book=<?php echo $row['id']; ?>">
+                                <a id="view" href="view.php?view_book=<?php echo $row['id']; ?>">
                                     <span class="material-symbols-outlined">visibility</span>
                                 </a>
-                                <a href="update.php?update_book=<?php echo $row['id']; ?>">
+                                <a id="edit" href="update.php?update_book=<?php echo $row['id']; ?>">
                                     <span class="material-symbols-outlined">edit</span>
                                 </a>
-                                <a href="index.php?del_book=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this book?')">
+                                <a id="delete" href="index.php?del_book=<?php echo $row['id']; ?>" onclick="return confirm('Are you sure you want to delete this book?')">
                                     <span class="material-symbols-outlined">delete</span>
                                 </a>
                             </td>

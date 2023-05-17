@@ -80,3 +80,15 @@ table, td{
 table, td, th {
     padding: 0.5rem;
 }
+
+#view {
+    color: darkblue;
+}
+
+#edit {
+    color: darkgreen;
+}
+
+#delete {
+    color: darkred;
+}
