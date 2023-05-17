@@ -43,12 +43,12 @@ if (isset($_GET['update_book'])) {
         $book = $result->fetch_assoc();
 
         // Populate form fields with book data
-        $title = htmlspecialchars($book['title'], ENT_QUOTES, 'UTF-8');
-        $author = htmlspecialchars($book['author'], ENT_QUOTES, 'UTF-8');
-        $genre = htmlspecialchars($book['genre'], ENT_QUOTES, 'UTF-8');
-        $description = htmlspecialchars($book['description'], ENT_QUOTES, 'UTF-8');
-        $link = htmlspecialchars($book['link'], ENT_QUOTES, 'UTF-8');
-        $image = htmlspecialchars($book['image'], ENT_QUOTES, 'UTF-8');
+        $title = $book['title'];
+        $author = $book['author'];
+        $genre = $book['genre'];
+        $description = $book['description'];
+        $link = $book['link'];
+        $image = $book['image'];
     }
 }
 // Handle form submission
